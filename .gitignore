@@ -1,2 +1,4 @@
 .logs/
+eip-8025-analysis/.cargo-home/
+eip-8025-analysis/target-phase2/
 repos/

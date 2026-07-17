@@ -1,6 +1,6 @@
 # Lighthouse EIP-8025 Symbol Index
 
-Scope: verified branch-local symbols in `494b00a3491e2c5e281f6972aa00694b17f16722..0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5`. Lines refer to the checked-out HEAD. This is a Phase 1 inventory; caller/test notes identify Phase 2 traces and do not substitute for full behavior analysis.
+Scope: verified branch-local symbols in `494b00a3491e2c5e281f6972aa00694b17f16722..0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5`. Lines refer to the checked-out HEAD. The original Phase 1 inventory is preserved and the caller, test, and refinement notes below are superseding Phase 2 rerun findings.
 
 | Symbol | Path | Lines | Classification | Requirement IDs | Purpose | Callers | Tests |
 |---|---|---:|---|---|---|---|---|
@@ -45,4 +45,13 @@ Scope: verified branch-local symbols in `494b00a3491e2c5e281f6972aa00694b17f1672
 
 ## Explicit incompleteness markers
 
-**Verified Lighthouse facts:** `proof_verification.rs:7` says proof-engine end-to-end integration is TODO, `proof_verification.rs:115` says signature verification should migrate onto `BeaconChain`, and `eip8025/mod.rs:6` repeats an integration TODO. These comments may be stale relative to call sites; Phase 2 must determine actual behavior and should not treat comments alone as definitive gaps.
+**Verified Lighthouse facts:** `proof_verification.rs:7` says proof-engine end-to-end integration is TODO, `proof_verification.rs:115` says signature verification should migrate onto `BeaconChain`, and `eip8025/mod.rs:6` repeats an integration TODO. The rerun confirms the end-to-end comment is stale relative to the reachable call path; the comments alone are not evidence that integration is absent.
+
+## Phase 2 rerun verified refinements
+
+- `verify_and_observe_execution_proof` does call the configured proof engine after context, dedup, index/pubkey and BLS checks; the end-to-end TODO is stale. It does **not** check validator active status.
+- `ExecutionProofStatusCache` is memory-only: bidirectional request/block LRUs and proof LRU are each bounded at 8,192; status metadata is a `HashMap`. No durable proof database representation was introduced.
+- `ObservedExecutionProofs::prune` has no located branch-local caller, and no equivalent explicit status-cache finality prune was found.
+- `try_mark_proof_backed_payload_valid` is reachable only when the non-default quorum config is enabled and K distinct proof types have been observed. It calls existing pre-Gloas/Gloas fork-choice payload-valid APIs.
+- `ProofService` consumes ordinary block SSE, skips optimistic blocks, uses the first doppelganger-safe validator, tracks requests for five minutes, and is pre-Gloas-shaped despite BN-side Gloas request construction support.
+- Proof-engine `notify_new_payload` and forkchoice-updated calls were not found; payload hooks register/derive request roots locally.

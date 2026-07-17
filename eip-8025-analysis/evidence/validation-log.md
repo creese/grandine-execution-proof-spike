@@ -177,3 +177,48 @@ The focused patch contains all 41 Direct files. Supporting files remain in the c
 - The pinned execution-specs revision linked from the EIP is not among the declared workspace repositories, so canonical EL code/tests were not independently verified in Phase 1.
 
 Phase 2 was not begun.
+
+## Phase 2 rerun — Lighthouse implementation analysis (2026-07-17)
+
+### Phase start
+
+- EIPs: `feat/eip8025` / `3aa6b30641ef8f98f8945b29ee92c1e8aed1070a`, clean.
+- consensus-specs: `master` / `8c12caee279d77b322446d33440b37479117dcde`, clean.
+- Lighthouse: `optional-proofs-unstable` / `0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5`, clean.
+- Grandine: `develop` / `d8adce56ed2a324c5abd72af8c0ff94a492ae7d3`, clean (recorded only; not analyzed).
+- Inputs consumed: Phase 1 main report; requirement index; selected diff; changed-file inventory; Git baseline; Lighthouse symbol index; discrepancy matrix; validation log; live source/spec/code/tests.
+- Planned output: `02-lighthouse-implementation.md` plus evidence-index updates.
+
+### Commands and outcomes
+
+| Command | Outcome |
+|---|---|
+| repository branch/HEAD/remotes/status loop | Passed; all four source worktrees clean at phase start |
+| `git diff --stat 494b00a...0dd6c3b` | Confirmed 109 files, 18,923 insertions, 251 deletions |
+| focused `rg`/`sed` inspection over Direct areas, requirements, important callers, pruning, active-validator checks, notifications, and tests | Passed; confirmed the report's principal positive and missing-path findings |
+| requirement-index/report row comparison | Passed; 44 stable index IDs and 44 distinct mapping rows, with no grouped or range row |
+| `CARGO_HOME=/work/eip-8025-analysis/.cargo-home CARGO_TARGET_DIR=/work/eip-8025-analysis/target-phase2 cargo test -p types eip8025 --lib` | Compilation resumed from the analysis-local cache; failed in `leveldb-sys` because `c++` is unavailable. No test executed. This is an environment limitation, not a Lighthouse test failure. |
+
+The separate Cargo home and target are analysis/build artifacts under the authorized analysis directory. No code or manifest was changed to make validation pass.
+
+### Failed validations
+
+1. Focused Lighthouse type tests were not executed because the host lacks a C++ compiler required by the workspace's `leveldb-sys` dependency. The rerun reproduced this limitation with exit code 101.
+2. Full mock proof-engine, zkBoost, simulator, Kurtosis, and GPU suites were not run in the rerun due to their external-service/toolchain cost. Their source and CI definitions were inspected and are reported as static evidence, not successful local runs.
+
+### Phase-end checks
+
+- Main output and all three required evidence updates exist and are non-empty under `/work/eip-8025-analysis`.
+- The rerun replaced the report, superseded rather than duplicated Phase 2-derived evidence sections, expanded the requirement mapping to 44 distinct rows, and expanded the validation table to all eight mandated columns.
+- Evidence labels, source conflicts, unchanged context, and branch-local attribution were checked.
+- No Phase 3 Grandine analysis was performed.
+- End-of-phase repository statuses are recorded below; no source repository was intentionally modified.
+
+```text
+EIPs:             ## feat/eip8025...origin/feat/eip8025
+consensus-specs:  ## master...origin/master
+Lighthouse:       ## optional-proofs-unstable...origin/optional-proofs-unstable
+Grandine:         ## develop...origin/develop
+```
+
+All four status outputs contain no modified, staged, or untracked paths. Phase 2 outputs created/updated: `02-lighthouse-implementation.md`, `evidence/lighthouse-symbol-index.md`, `evidence/spec-discrepancy-matrix.md`, and `evidence/validation-log.md`.

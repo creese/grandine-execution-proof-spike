@@ -24,6 +24,17 @@ Compared sources: EIP `3aa6b30641ef8f98f8945b29ee92c1e8aed1070a`; consensus-spec
 | Tests | Links pinned consensus feature directory as “Test Cases” (`1138-1141`) | No tests in checked-out feature directory | Missing artifacts | Normative behavior lacks local vector coverage | Where are CL vectors, especially negative gossip and SSZ/root cases? |
 | EL source availability | EIP delegates canonical EL semantics to pinned execution-specs revision (`61-72`) | Workspace consensus feature contains no EL spec | Source-set gap | Phase 1 can index EIP statements but cannot independently verify canonical EL implementation | Should execution-specs be added as a read-only source for later proposal work? |
 
-## Lighthouse alignment preview (scope evidence only)
+## Lighthouse alignment (Phase 2 rerun)
 
-**Verified Lighthouse facts:** branch-local `consensus/types/src/execution/eip8025.rs:19-42,51-70` uses a 1,376,256-byte bounded `VariableList`, four proofs, domain `0x0D`, and root-only `PublicInput`. Thus it follows the EIP on domain and fixed `ByteList` style, follows the checked-out consensus feature on root-only public input, and follows neither source on maximum proof size. This hybrid is a Phase 2 investigation priority, not a resolution.
+**Verified Lighthouse facts:** branch-local `consensus/types/src/execution/eip8025.rs:19-42,51-70` uses a 1,376,256-byte bounded `VariableList`, four proofs, domain `0x0D`, and root-only `PublicInput`. Thus it follows the EIP on domain and fixed `ByteList` style, follows the checked-out consensus feature on root-only public input, and follows neither source on maximum proof size. The Phase 2 rerun confirms this hybrid and does not resolve the source conflict.
+
+## Phase 2 rerun Lighthouse findings
+
+| Topic | Verified Lighthouse behavior | Alignment / significance |
+|---|---|---|
+| Active validator | `verify_and_observe_execution_proof` resolves validator index/pubkey but does not load/check active status | Partial implementation of both EIP and consensus requirement; invalid eligibility can pass |
+| Quorum/fork choice | Default disabled; `--execution-proof-quorum K` counts distinct proof types and invokes fork-choice payload-valid APIs | Lighthouse-specific experimental behavior conflicts with the EIP's categorical containment invariant |
+| Retention | 8,192-entry request/proof LRUs plus status map, memory-only; no durable DB or demonstrated finality-prune call | Partial serving implementation, not guaranteed canonical finalized-to-head retention |
+| Proof-node notification | Payload paths register request roots; no explicit proof-node `notify_new_payload` or head/safe/finalized call found | ENGINE-002 partial and ENGINE-003 not found |
+| Prover lifecycle | VC uses ordinary non-optimistic block SSE, fetches a full block, and constructs a pre-Gloas request | Partial EIP-like implementation; differs from consensus feature's Gloas envelope/bid path |
+| Activation | BN/VC endpoints gate startup behavior and ENR/topic enablement; no EIP fork/upgrade or live hot toggle | No-hardfork aspect implemented; dynamic toggling not demonstrated |
