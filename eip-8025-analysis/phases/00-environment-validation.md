@@ -30,7 +30,7 @@ Validate the following control files:
 
 Validate the following sources:
 
-- `/work/repos/EIPs/eip-8025.md`
+- `/work/repos/EIPs/EIPS/eip-8025.md`
 - `/work/repos/consensus-specs/specs/_features/eip8025/`
 - `/work/repos/lighthouse`
 - `/work/repos/grandine`
@@ -83,7 +83,7 @@ Check that:
 - the filenames listed in `TASK.md` exactly match the phase files present;
 - all references use `phases/`, not the obsolete `passes/` directory;
 - the source paths are consistently defined as:
-  - `/work/repos/EIPs/eip-8025.md`
+  - `/work/repos/EIPs/EIPS/eip-8025.md`
   - `/work/repos/consensus-specs/specs/_features/eip8025/`
   - `/work/repos/lighthouse`
   - `/work/repos/grandine`
@@ -262,7 +262,7 @@ Append relevant raw command output to:
 
 Verify that:
 
-- `/work/repos/EIPs/eip-8025.md` exists;
+- `/work/repos/EIPs/EIPS/eip-8025.md` exists;
 - it is readable;
 - it is non-empty;
 - it appears to be an EIP-8025 document.

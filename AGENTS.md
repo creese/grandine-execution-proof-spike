@@ -19,7 +19,7 @@ Do not use `CODEX_HOME` for task output.
 
 ## Source roles
 
-- `/work/repos/EIPs/eip-8025.md`: work-in-progress EIP text.
+- `/work/repos/EIPs/EIPS/eip-8025.md`: work-in-progress EIP text.
 - `/work/repos/consensus-specs/specs/_features/eip8025/`: consensus-spec feature implementation.
 - `/work/repos/lighthouse`: Lighthouse on the `optional-proofs-unstable` branch, containing a work-in-progress implementation.
 - `/work/repos/grandine`: target client for the proposed implementation.

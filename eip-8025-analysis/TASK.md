@@ -6,7 +6,7 @@ Analyze EIP-8025 across the EIP text, consensus specifications, Lighthouse imple
 
 ## Sources
 
-- EIP: `/work/repos/EIPs/eip-8025.md`
+- EIP: `/work/repos/EIPs/EIPS/eip-8025.md`
 - Consensus specs: `/work/repos/consensus-specs/specs/_features/eip8025/`
 - Lighthouse: `/work/repos/lighthouse`
 - Grandine: `/work/repos/grandine`
@@ -22,6 +22,7 @@ Expected layout:
     /work/eip-8025-analysis/
     ├── TASK.md
     ├── phases/
+    │   ├── 00-environment-validation.md
     │   ├── 01-spec-and-lighthouse-scope.md
     │   ├── 02-lighthouse-implementation.md
     │   ├── 03-grandine-gap-analysis.md
@@ -38,6 +39,7 @@ Expected layout:
     │   ├── grandine-symbol-index.md
     │   ├── lighthouse-grandine-map.md
     │   └── validation-log.md
+    ├── 00-environment-validation.md
     ├── 01-spec-and-lighthouse-scope.md
     ├── 02-lighthouse-implementation.md
     ├── 03-grandine-gap-analysis.md
@@ -52,12 +54,16 @@ Run four sequential phases. Do not begin a later phase unless explicitly instruc
 
 Phase instructions:
 
+- `/work/eip-8025-analysis/phases/00-environment-validation.md`
 - `/work/eip-8025-analysis/phases/01-spec-and-lighthouse-scope.md`
 - `/work/eip-8025-analysis/phases/02-lighthouse-implementation.md`
 - `/work/eip-8025-analysis/phases/03-grandine-gap-analysis.md`
 - `/work/eip-8025-analysis/phases/04-grandine-proposal.md`
 
 ## Phase summaries
+
+### Phase 0
+Validate that the workspace, source repositories, analysis instructions, and required tools are ready for the EIP-8025 analysis.
 
 ### Phase 1
 Establish repository revisions, EIP and consensus-spec requirements, specification discrepancies, Lighthouse comparison base, branch-local changes, classifications, and symbol inventory.
