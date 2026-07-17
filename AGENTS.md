@@ -41,7 +41,7 @@ Focused build or test commands may create normal ignored artifacts when a phase 
 Use these labels consistently:
 
 ### EIP statement
-Text explicitly present in `/work/repos/EIPs/eip-8025.md`.
+Text explicitly present in `/work/repos/EIPs/EIPS/eip-8025.md`.
 
 ### Consensus-spec requirement
 Behavior, types, constants, validation, transitions, activation, or tests defined under `/work/repos/consensus-specs/specs/_features/eip8025/`.

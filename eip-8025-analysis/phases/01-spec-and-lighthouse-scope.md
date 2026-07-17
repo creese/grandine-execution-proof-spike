@@ -12,24 +12,18 @@ Read:
 
 - `/work/AGENTS.md`
 - `/work/eip-8025-analysis/TASK.md`
-- `/work/repos/EIPs/eip-8025.md`
+- `/work/eip-8025-analysis/00-environment-validation.md`
+- `/work/eip-8025-analysis/evidence/instruction-validation.md`
+- `/work/eip-8025-analysis/evidence/repository-baselines.md`
+- `/work/eip-8025-analysis/evidence/validation-log.md`
+- `/work/repos/EIPs/EIPS/eip-8025.md`
 - all relevant files under `/work/repos/consensus-specs/specs/_features/eip8025/`
-
-Inspect repository metadata for:
-
-- `/work/repos/EIPs`
-- `/work/repos/consensus-specs`
-- `/work/repos/lighthouse`
-- `/work/repos/grandine`
-
-Grandine inspection is limited to revision, branch, remotes, and working-tree state.
 
 ## Outputs
 
 Write:
 
 - `/work/eip-8025-analysis/01-spec-and-lighthouse-scope.md`
-- `/work/eip-8025-analysis/evidence/repository-baselines.md`
 - `/work/eip-8025-analysis/evidence/spec-requirement-index.md`
 - `/work/eip-8025-analysis/evidence/spec-discrepancy-matrix.md`
 - `/work/eip-8025-analysis/evidence/lighthouse-git-baseline.txt`
@@ -40,9 +34,26 @@ Write:
 
 ## Work
 
-### 1. Repository baselines
+### 1. Phase 0 readiness check
 
-For each repository record path, branch or detached state, HEAD, remotes, upstream, working-tree status, and pre-existing changes.
+Read the Phase 0 report and instruction-validation evidence.
+
+Proceed only when the Phase 0 readiness result is:
+
+- `Ready for Phase 1`; or
+- `Ready for Phase 1 with warnings`.
+
+Do not proceed if:
+
+- Phase 0 reports `Not ready for Phase 1`; or
+- `evidence/instruction-validation.md` contains unresolved blockers.
+
+Before continuing, verify that the current Lighthouse branch, HEAD, and
+working-tree status still match `evidence/repository-baselines.md`.
+
+If Phase 0 has unresolved blockers or the Lighthouse baseline has changed in a
+way that invalidates the analysis, record the problem in
+`01-spec-and-lighthouse-scope.md` and stop.
 
 ### 2. Requirement model
 
@@ -104,6 +115,10 @@ Create a relevant-only patch where practical and a symbol index:
 
 ## Completion checks
 
-Verify all repository revisions are recorded, every Lighthouse changed file is classified, every included change has evidence, discrepancies remain visible, no Grandine architecture claims were made, no repository was modified, and all outputs exist.
+Verify Phase 0 approved proceeding to Phase 1, instruction validation contained
+no unresolved blockers, the Lighthouse baseline was checked for drift, every
+Lighthouse changed file is classified, every included change has evidence,
+discrepancies remain visible, no Grandine architecture claims were made, no
+repository was modified, and all outputs exist.
 
 Do not begin Phase 2.

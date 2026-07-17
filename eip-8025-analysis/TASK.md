@@ -28,6 +28,7 @@ Expected layout:
     │   ├── 03-grandine-gap-analysis.md
     │   └── 04-grandine-proposal.md
     ├── evidence/
+    │   ├── instruction-validation.md
     │   ├── repository-baselines.md
     │   ├── spec-requirement-index.md
     │   ├── spec-discrepancy-matrix.md
@@ -50,7 +51,7 @@ Create missing directories as needed.
 
 ## Execution model
 
-Run four sequential phases. Do not begin a later phase unless explicitly instructed. Later phases must read and verify relevant earlier outputs.
+Run five sequential phases. Do not begin a later phase unless explicitly instructed. Later phases must read and verify relevant earlier outputs.
 
 Phase instructions:
 
@@ -117,4 +118,4 @@ Link to detailed phase reports. Avoid duplicating whole sections verbatim.
 
 ## Completion
 
-The overall task is complete only when all four phases are complete, required evidence files exist, proposals trace to requirements and verified code, all repositories remain unmodified, and the final report records exact revisions.
+The overall task is complete only when all five phases are complete, required evidence files exist, proposals trace to requirements and verified code, all repositories remain unmodified, and the final report records exact revisions.
