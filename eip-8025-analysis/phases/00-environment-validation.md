@@ -436,7 +436,7 @@ State explicitly whether Phase 1 should proceed.
 
 When recommending against proceeding, identify the exact corrections required.
 
-## Completion rules
+## Completion checks
 
 Before finishing:
 

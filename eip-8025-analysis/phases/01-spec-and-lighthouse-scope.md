@@ -51,8 +51,12 @@ Do not proceed if:
 Before continuing, verify that the current Lighthouse branch, HEAD, and
 working-tree status still match `evidence/repository-baselines.md`.
 
-If Phase 0 has unresolved blockers or the Lighthouse baseline has changed in a
-way that invalidates the analysis, record the problem in
+Verify that the current EIPs and consensus-specs HEAD revisions and working-tree states match the Phase 0 repository baselines before extracting requirements.
+
+If either repository has revision or working-tree drift, record the exact difference in the Phase 1 report and stop unless the drift is explicitly accepted by the workspace instructions.
+
+If Phase 0 has unresolved blockers or any checked repository baseline has
+changed in a way that invalidates the analysis, record the problem in
 `01-spec-and-lighthouse-scope.md` and stop.
 
 ### 2. Requirement model
