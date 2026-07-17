@@ -26,7 +26,11 @@ Update when necessary:
 
 ## Scope
 
-Analyze only the selected Lighthouse branch-local diff and direct or supporting EIP-8025 changes. Use unchanged code only as labeled context.
+Analyze only the selected Lighthouse branch-local diff and EIP-8025-related changes.
+
+Analyze every Direct change in depth. Inspect Supporting changes only as needed to explain wiring, configuration, tests, dependencies, simulation, documentation, and lifecycle.
+
+Use unchanged code only as labeled context.
 
 ## Method
 
@@ -107,6 +111,6 @@ Include Mermaid diagrams.
 
 ## Completion checks
 
-Verify all important branch changes are explained, requirement mappings are complete, unchanged code is labeled as context, flows are consistent, discrepancies are explicit, no unsupported Grandine claims are made, no repository was modified, and outputs exist.
+Verify that every Direct change is explained in depth, every Supporting change is accounted for at the appropriate level, unchanged code is labeled as context, requirement mappings are complete, flows are consistent, discrepancies are explicit, no unsupported Grandine claims are made, no repository was modified, and outputs exist.
 
 Do not begin Phase 3.
