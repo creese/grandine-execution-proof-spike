@@ -1,0 +1,59 @@
+Phase 1 Lighthouse Git baseline
+Recorded: 2026-07-17 UTC
+
+Repository: /work/repos/lighthouse
+Branch: optional-proofs-unstable
+HEAD: 0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5
+Upstream: origin/optional-proofs-unstable (same commit)
+Working tree: clean; no modified, staged, or untracked paths
+Remote: origin git@github-creese:eth-act/lighthouse.git (fetch/push)
+
+Selected comparison base: 494b00a3491e2c5e281f6972aa00694b17f16722
+Selected base subject: Fix O(n²) find_head and stack overflow in filter_block_tree (#9090)
+First branch commit: ad61231736ecf955f0a7ef87174fb419a8685b39 Add optional execution proofs
+First branch commit parent: 494b00a3491e2c5e281f6972aa00694b17f16722
+Merge base of selected base and HEAD: 494b00a3491e2c5e281f6972aa00694b17f16722
+Exact diff range: 494b00a3491e2c5e281f6972aa00694b17f16722..0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5
+Diff summary: 109 files changed, 18,923 insertions, 251 deletions; no rename detected
+
+Selection rationale:
+- HEAD has a linear seven-commit feature sequence beginning with an explicitly named EIP-8025 commit.
+- Every subsequent commit is an optional-proof implementation, test, SSZ codec, or CI correction.
+- The selected base is exactly the parent of that sequence, so it excludes unrelated earlier Lighthouse work while retaining all branch-local EIP-8025 work.
+- This is more defensible than assuming the remote default or current unstable tip.
+
+Branch-only commits (oldest first):
+ad61231736ecf955f0a7ef87174fb419a8685b39  2026-05-26T23:41:57+01:00  Add optional execution proofs
+d8a80b985829b669338518b0e7579958fa28c8ba  2026-05-27T01:07:13+01:00  Fix optional proof CI failures
+d7e2344195e84af9be902269a187c05ad9e206dc  2026-05-27T01:37:44+01:00  Isolate optional proof CI caches
+d44086aa18f01e1734e6c8246d1165b8cae0685a  2026-05-27T23:29:52+01:00  feat: restore optional proof test coverage
+70396010df41dea649c94f81e5ec4a07fea719c7  2026-06-05T03:46:53+02:00  Fix SSZ encoding of ExecutionProofsByRange requests
+c07e8c2802e8995f39dec1be597deacd5477e046  2026-06-05T03:47:03+02:00  Fix CI compile, docs and zkboost dependency failures
+0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5  2026-06-05T04:31:19+02:00  Minimal CI fixes after proof-sync revert
+
+Alternatives evaluated:
+- origin/unstable = dfb259171a65cacd6db57b8874af8f543cabcb7a. It is 25 commits ahead of HEAD and has HEAD as an ancestor (rev-list origin/unstable...HEAD = 0 left / 25 right when printed ref...HEAD). Its merge base with HEAD is HEAD, so it cannot isolate changes introduced by this branch.
+- origin/stable = ced49dd265e01ecbf02b12073bbfde3873058abe. It is an older ancestor and would include 370 commits in stable...HEAD, overwhelmingly unrelated.
+- origin/optional-proofs = e81a3165dedfee44b5275cd561cf03281ad1ab1d and origin/feat/eip8025 = 2467d50717c377d352b50a9bc2cef2336c72acdb. Their merge base with HEAD is 58b153cac5a078d849bf8478bd21baedfe98d9ee and their histories have diverged substantially (115/270 and 106/270 counts respectively); they are sibling/alternate implementations, not bases of this branch.
+- origin/optional-proofs-old similarly diverges at 2ce6b51269708a1c28c69a3241028522ebc153df with 72/293 counts.
+- origin/HEAD points to origin/optional-proofs, demonstrating why the remote default cannot be assumed to be the base.
+
+Locally available PR metadata:
+- Commit subjects contain upstream-style PR numbers for ordinary Lighthouse commits and `#38` on the sibling optional-proofs branch, but the selected branch’s seven commits contain no locally stored PR description identifying a different base.
+- No network fetch or remote mutation was performed.
+
+Uncertainty:
+- Low for the exact branch-local boundary because the first feature commit’s parent is unambiguous and the sequence is linear.
+- Moderate for relationship to the sibling `optional-proofs`/`feat/eip8025` histories; they are not used for the Phase 1 diff and may contain later design changes worth contextual comparison only if Phase 2 needs it.
+
+Commands used:
+git branch -vv
+git branch -a --no-color
+git remote show origin
+git log --graph --decorate --oneline --all --date-order -80
+git for-each-ref ... refs/heads refs/remotes
+git merge-base HEAD <candidate>
+git rev-list --left-right --count <candidate>...HEAD
+git log --reverse --format=... 494b00a34..HEAD
+git diff --name-status --find-renames 494b00a34..HEAD
+git diff --numstat 494b00a34..HEAD

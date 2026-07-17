@@ -124,3 +124,56 @@ Grandine:         ## develop...origin/develop
 ```
 
 Repositories under `/work/repos` were not intentionally or observably modified. Phase 1 was not begun.
+
+## Phase 1 — Specification Baseline and Lighthouse Scope
+
+Date: 2026-07-17 UTC
+
+### Start bookkeeping and readiness
+
+- Phase: 1 — Specification Baseline and Lighthouse Scope.
+- Inputs consumed: `/work/AGENTS.md`, `TASK.md`, Phase 0 main report and three evidence files, current Phase 1 runbook, complete EIP, and all five consensus feature files.
+- Outputs: Phase 1 main report, requirement index, discrepancy matrix, Lighthouse Git baseline, changed-file inventory, relevant patch, symbol index, and this log update.
+- Phase 0 result: `Ready for Phase 1 with warnings`; instruction validation had no blocker.
+- Current Phase 1 runbook SHA-256 is `33e7d37f92f6492962a70a12f52319b16f214247d0ec0ce6b59cfcd37adb1dfc`, changed from the Phase 0-recorded hash to add explicit EIPs/consensus-specs drift checks. The current instruction was followed.
+- EIPs, consensus-specs, and Lighthouse branch/HEAD/upstream/status exactly matched Phase 0 and were clean.
+
+### Source extraction commands
+
+- Complete numbered reads: `nl -ba EIPS/eip-8025.md` in three ranges and `nl -ba specs/_features/eip8025/*.md`.
+- Focused indexes: `rg -n` over headings, normative terms, constants, TODOs, symbols, call-site keywords and configuration.
+- No external execution-specs checkout was available in the declared source set; EIP EL statements were indexed as EIP statements and the source gap remains open.
+
+### Lighthouse scope commands and key results
+
+Commands included `git branch -vv`, `git branch -a`, `git remote show origin`, graph/refs logs, `git merge-base`, `git rev-list --left-right --count`, commit logs/stats, name-status, numstat, zero-context hunk extraction, and symbol searches.
+
+```text
+branch: optional-proofs-unstable
+HEAD/upstream: 0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5
+selected base: 494b00a3491e2c5e281f6972aa00694b17f16722
+first feature commit: ad61231736ecf955f0a7ef87174fb419a8685b39
+exact range: 494b00a3491e2c5e281f6972aa00694b17f16722..0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5
+summary: 109 files changed, 18923 insertions, 251 deletions
+classification: 41 Direct, 68 Supporting, 0 Unrelated
+renames: none
+```
+
+The focused patch contains all 41 Direct files. Supporting files remain in the canonical inventory/range but their bodies are omitted from the focused patch for practicality.
+
+### Validation
+
+- `git apply --check --reverse evidence/lighthouse-relevant-diff.patch` against Lighthouse HEAD returned 0, proving the focused patch is syntactically valid and exactly reversible for the selected direct changes.
+- Git range file count: 109; inventory row count: 109; direct count: 41; supporting count: 68; patch file count: 41.
+- Requirement index contains 44 stable requirement rows; discrepancy matrix contains 19 substantive topic rows (20 `|`-prefixed rows including its header).
+- All eight required Phase 1 outputs exist and are non-empty.
+- Final statuses for EIPs, consensus-specs, Lighthouse, and Grandine contain no modified, staged, or untracked paths and match their opening branches.
+- No build/test was run: Phase 1 is source/specification/diff scoping, and patch structural validation was the focused proportional check. Phase 2 owns implementation behavior testing.
+
+### Failed commands and limitations
+
+- Two initial dynamic artifact-generation scripts failed at JavaScript parse time (`SyntaxError: Unexpected token '.'`) due to an incorrectly escaped regular-expression literal in the orchestration code. They executed no artifact patch and no repository mutation. The corrected generator succeeded; counts and reversibility were independently verified.
+- `git remote show origin` was read-only and used local remote metadata; no fetch was performed, so conclusions are bounded to locally available refs.
+- The pinned execution-specs revision linked from the EIP is not among the declared workspace repositories, so canonical EL code/tests were not independently verified in Phase 1.
+
+Phase 2 was not begun.
