@@ -24,6 +24,11 @@ Update when necessary:
 - `evidence/spec-discrepancy-matrix.md`
 - `evidence/validation-log.md`
 
+When rerunning Phase 2, replace the Phase 2 report and supersede any
+Phase 2-derived additions from the previous run in the listed evidence files.
+Preserve valid evidence established by earlier phases. Do not append duplicate
+Phase 2 sections or retain findings invalidated by the rerun.
+
 ## Scope
 
 Analyze only the selected Lighthouse branch-local diff and EIP-8025-related changes.
@@ -42,7 +47,11 @@ Run focused tests or checks when practical. Record failures.
 
 ### Requirement mapping
 
-For each requirement ID classify Lighthouse as implemented, partial, different, not found, not applicable, or ambiguous.
+For each stable requirement ID in `evidence/spec-requirement-index.md`, provide one distinct mapping row. Do not combine multiple IDs into a range or a single row, even when their classifications and evidence are identical.
+
+Verify the total number of mapped requirement IDs against the requirement index and state the verified count consistently throughout the report.
+
+Classify each requirement as implemented, partial, different, not found, not applicable, or ambiguous.
 
 ### Functional architecture
 
@@ -58,11 +67,32 @@ Document protocol types, internal wrappers, fields, bounds, constants, SSZ, tree
 
 ### Validation
 
-For every rule, state condition, requirement ID, location, stage, error, criticality, tests, and duplicate validation.
+For every validation rule, record:
+
+* condition;
+* requirement ID;
+* source path and symbol;
+* execution stage;
+* error or result;
+* criticality;
+* tests;
+* duplicate or overlapping validation elsewhere.
+
+Use a table with these columns:
+
+| Rule or condition | Requirement ID | Path and symbol | Stage | Error or result | Criticality | Tests | Duplicate validation |
 
 ### Activation
 
 Explain fork identifier, epoch/version configuration, presets, upgrade, first activation slot or epoch, disabled behavior, compatibility, and temporary assumptions.
+
+### Repository safety verification
+
+At both the beginning and end of the phase, verify the branch, HEAD, and working-tree state of EIPs, consensus-specs, Lighthouse, and Grandine.
+
+Record the final status in `evidence/validation-log.md`.
+
+If any source repository is modified or has unexpected revision drift, record the exact difference in the Phase 2 report and stop unless the workspace instructions explicitly authorize continuing.
 
 ### Tests
 
@@ -111,6 +141,10 @@ Include Mermaid diagrams.
 
 ## Completion checks
 
-Verify that every Direct change is explained in depth, every Supporting change is accounted for at the appropriate level, unchanged code is labeled as context, requirement mappings are complete, flows are consistent, discrepancies are explicit, no unsupported Grandine claims are made, no repository was modified, and outputs exist.
+Verify that every stable requirement ID has its own mapping row and that the mapped count matches `evidence/spec-requirement-index.md`.
+
+Verify that every validation rule includes its condition, requirement ID, path and symbol, stage, error or result, criticality, tests, and duplicate-validation status.
+
+Verify that every Direct change is explained in depth, every Supporting change is accounted for at the appropriate level, unchanged code is labeled as context, flows are consistent, discrepancies are explicit, no unsupported Grandine claims are made, all source repositories match their accepted branch and HEAD baselines and are clean at phase completion, and all declared outputs exist.
 
 Do not begin Phase 3.
