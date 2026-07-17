@@ -12,7 +12,7 @@ Do not begin:
 - Lighthouse merge-base or diff classification;
 - Lighthouse implementation analysis;
 - Grandine architecture mapping;
-- proposal generation.
+- proposal review.
 
 Do not edit instruction files or source repositories during this phase. Report required corrections instead.
 
@@ -134,21 +134,21 @@ For each phase, determine whether its instructions are:
   a later phase;
 - traceable: major outputs can be traced to source evidence and earlier
   deliverables;
-- proposal-complete: the combined phases gather all evidence needed by the
-  final Grandine proposal.
+- review-ready: the combined phases gather all evidence needed to review the
+  user-authored Grandine proposal without generating or rewriting it.
 
 Check the workflow as a whole for:
 
 - missing prerequisite work;
 - duplicate analysis across phases;
 - gaps between specification analysis, Lighthouse analysis, Grandine mapping,
-  and proposal generation;
+  and proposal review;
 - outputs produced but never consumed;
 - inputs referenced but never produced;
 - inconsistent terminology or evidence categories;
 - requirements that disappear between phases;
-- Grandine proposals not grounded in the gap analysis;
-- final-report sections that no phase gathers evidence for.
+- proposal-review checks that do not verify Grandine claims against the gap analysis;
+- proposal-review sections that no phase gathers evidence for.
 
 For every problem, report:
 

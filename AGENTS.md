@@ -63,6 +63,15 @@ A conflict, ambiguity, omission, placeholder, unfinished section, or mismatch am
 
 Never present an inference or proposal as a verified fact.
 
+## Proposal authorship and review
+
+The Grandine implementation proposal is user-authored at:
+
+    /work/eip-8025-analysis/grandine-eip-8025-proposal.md
+
+Phase 4 is review-only. Treat the proposal as immutable input.
+Do not create, rewrite, edit, or replace it.
+
 ## Source conflicts
 
 Do not assume the sources are synchronized.
@@ -73,7 +82,10 @@ When they differ:
 2. Identify whether Lighthouse follows the EIP, consensus specs, neither, or a hybrid.
 3. Explain the likely significance.
 4. Do not invent a resolution.
-5. Carry unresolved conflicts into the final proposal and risk register.
+5. During Phase 4, verify that the user-authored proposal preserves unresolved
+   conflicts or explicitly labels assumptions and their consequences. Flag
+   silent resolution of wire, serialization, hashing, signing, validation, or
+   consensus-boundary conflicts.
 
 Lighthouse code is authoritative for what Lighthouse implements. Grandine code is authoritative for Grandine architecture. Compare the EIP and consensus specs to determine intended behavior without assuming either is final.
 

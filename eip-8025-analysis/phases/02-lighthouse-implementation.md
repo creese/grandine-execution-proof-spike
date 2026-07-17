@@ -6,7 +6,8 @@ Produce a complete technical analysis of the Lighthouse EIP-8025 implementation 
 
 Keep EIP statements, consensus-spec requirements, verified Lighthouse behavior, Lighthouse architecture, and open discrepancies distinct.
 
-Do not perform the full Grandine gap analysis or final proposal.
+Do not perform the full Grandine gap analysis, author the proposal, or review
+the user-authored proposal.
 
 ## Inputs
 

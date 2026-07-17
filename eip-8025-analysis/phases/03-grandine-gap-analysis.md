@@ -6,7 +6,7 @@ Inspect Grandine directly and map the complete EIP-8025 implementation surface t
 
 Identify existing capabilities, reusable abstractions, missing functionality, likely files and symbols, tests, dependencies, and design decisions.
 
-Do not write the final proposal.
+Do not write or review the user-authored proposal.
 
 ## Inputs
 
@@ -96,7 +96,7 @@ Identify unresolved choices around type representation, generic versus fork-spec
 | Work area | Complexity | Consensus risk | Reason | Dependencies |
 
 ## 14. Grandine design questions
-## 15. Proposal inputs for Phase 4
+## 15. Proposal-review inputs for Phase 4
 ## 16. Appendix
 
 ## Completion checks

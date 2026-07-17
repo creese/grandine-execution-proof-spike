@@ -2,7 +2,7 @@
 
 ## Goal
 
-Analyze EIP-8025 across the EIP text, consensus specifications, Lighthouse implementation, and Grandine architecture. Produce an evidence-based proposal for implementing EIP-8025 in Grandine.
+Analyze EIP-8025 across the EIP text, consensus specifications, Lighthouse implementation, and Grandine architecture. Build the evidence needed to review a user-authored proposal for implementing EIP-8025 in Grandine.
 
 ## Sources
 
@@ -13,7 +13,7 @@ Analyze EIP-8025 across the EIP text, consensus specifications, Lighthouse imple
 
 Expected Lighthouse branch: `optional-proofs-unstable`. Verify it rather than assuming it.
 
-## Outputs
+## Workspace artifacts
 
 All output belongs under `/work/eip-8025-analysis`.
 
@@ -39,15 +39,18 @@ Expected layout:
     │   ├── grandine-git-baseline.txt
     │   ├── grandine-symbol-index.md
     │   ├── lighthouse-grandine-map.md
-    │   └── validation-log.md
+    │   ├── validation-log.md
+    │   └── proposal-traceability-matrix.md
     ├── 00-environment-validation.md
     ├── 01-spec-and-lighthouse-scope.md
     ├── 02-lighthouse-implementation.md
     ├── 03-grandine-gap-analysis.md
-    ├── 04-grandine-proposal.md
-    └── final-report.md
+    ├── grandine-eip-8025-proposal.md
+    └── 04-grandine-proposal-review.md
 
 Create missing directories as needed.
+
+`grandine-eip-8025-proposal.md` is user-authored input. Do not create, rewrite, or modify it. Phase 4 must report a blocker if it is absent, unreadable, or empty.
 
 ## Execution model
 
@@ -76,7 +79,7 @@ Explain Lighthouse end to end: types, SSZ, hashing, configuration, activation, u
 Map every responsibility to Grandine's current architecture. Identify reusable abstractions, missing functionality, likely target modules and symbols, tests, dependencies, and design decisions.
 
 ### Phase 4
-Produce concrete Grandine workstreams, dependency-aware sequencing, reviewable packages, acceptance criteria, interoperability tests, risk register, and a consolidated final report.
+Review the user-authored proposal against all Phase 1 through Phase 3 evidence. Produce exact requirement traceability and actionable findings without rewriting the proposal.
 
 ## Shared reporting rules
 
@@ -91,31 +94,15 @@ Every major report must:
 - identify unaffected areas;
 - record failed validation commands and environmental constraints.
 
-## Final report structure
+## Phase 4 review outputs
 
-# EIP-8025: Lighthouse Implementation and Grandine Implementation Proposal
+Phase 4 writes:
 
-## 1. Executive summary
-## 2. Source revisions and scope
-## 3. EIP and consensus-spec requirements
-## 4. Specification discrepancies and unresolved questions
-## 5. Lighthouse branch change inventory
-## 6. Lighthouse architecture and end-to-end behavior
-## 7. Data structures, serialization, hashing, and consensus rules
-## 8. Fork activation and compatibility
-## 9. Lighthouse tests and implementation evidence
-## 10. Grandine architecture mapping
-## 11. Grandine implementation gaps
-## 12. Proposed Grandine workstreams
-## 13. Recommended implementation sequence
-## 14. Work packages and acceptance criteria
-## 15. Test and interoperability strategy
-## 16. Risks and open questions
-## 17. Proposal-ready conclusions
-## 18. Evidence appendix
+- `/work/eip-8025-analysis/04-grandine-proposal-review.md`
+- `/work/eip-8025-analysis/evidence/proposal-traceability-matrix.md`
 
-Link to detailed phase reports. Avoid duplicating whole sections verbatim.
+The review must trace every stable requirement ID, identify unsupported or inaccurate claims, detect silently resolved specification conflicts, evaluate Grandine architecture grounding, assess tests and acceptance criteria, and provide actionable findings without rewriting the proposal.
 
 ## Completion
-
-The overall task is complete only when all five phases are complete, required evidence files exist, proposals trace to requirements and verified code, all repositories remain unmodified, and the final report records exact revisions.
+ 
+The overall task is complete only when Phases 0 through 3 are complete, the user-authored proposal has been reviewed without modification, every stable requirement ID has one exact traceability row, the Phase 4 review report and traceability matrix exist, findings trace to proposal locations and verified evidence, and all source repositories remain at their accepted revisions and are clean.
