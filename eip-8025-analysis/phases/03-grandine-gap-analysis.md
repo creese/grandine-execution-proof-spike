@@ -47,7 +47,19 @@ Use:
 
 | Requirement ID | Responsibility | Lighthouse implementation | Grandine analogue | Gap | Likely target | Confidence | Open question |
 
-Classify each as existing, extension required, new capability, no change expected, or unresolved.
+For every stable requirement ID in
+`evidence/spec-requirement-index.md`, provide one distinct mapping row.
+
+Use the exact complete requirement ID, including the `EIP8025-` prefix.
+Do not combine IDs, use ID ranges, introduce new IDs, or omit requirements
+that are not directly applicable to Grandine.
+
+Classify each as existing, extension required, new capability, no change
+expected, or unresolved.
+
+Verify that the set of mapping IDs exactly matches the requirement index,
+with no missing, additional, or duplicate IDs. State the verified count in
+the Phase 3 report and `evidence/validation-log.md`.
 
 ### 5. Gap analysis
 
@@ -90,5 +102,9 @@ Identify unresolved choices around type representation, generic versus fork-spec
 ## Completion checks
 
 Verify Grandine claims come from the checkout, every gap traces to a requirement or Lighthouse evidence, likely targets are evidence-backed, Lighthouse is not copied mechanically, unaffected areas are stated, no repository was modified, and outputs exist.
+
+Verify that `evidence/lighthouse-grandine-map.md` contains one distinct row
+for every exact stable requirement ID and that its ID set exactly matches
+`evidence/spec-requirement-index.md`.
 
 Do not begin Phase 4.
