@@ -222,3 +222,106 @@ Grandine:         ## develop...origin/develop
 ```
 
 All four status outputs contain no modified, staged, or untracked paths. Phase 2 outputs created/updated: `02-lighthouse-implementation.md`, `evidence/lighthouse-symbol-index.md`, `evidence/spec-discrepancy-matrix.md`, and `evidence/validation-log.md`.
+
+## Phase 3 — Grandine architecture and gap analysis (2026-07-17)
+
+### Phase start
+
+- EIPs: `feat/eip8025` / `3aa6b30641ef8f98f8945b29ee92c1e8aed1070a`, clean.
+- consensus-specs: `master` / `8c12caee279d77b322446d33440b37479117dcde`, clean.
+- Lighthouse: `optional-proofs-unstable` / `0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5`, clean.
+- Grandine: `develop` / `d8adce56ed2a324c5abd72af8c0ff94a492ae7d3`, clean, tracking `origin/develop`.
+- Working-tree caveat: Grandine optional submodules `grandine-snapshot-tests`, `hive`, and `slashing-protection-interchange-tests` were already uninitialized. No submodule command changed them.
+- Inputs consumed: Phase 1 main report, requirement index and discrepancy matrix; Phase 2 main report and Lighthouse symbol index; live EIP, consensus feature, Lighthouse and Grandine source.
+- Outputs planned: `03-grandine-gap-analysis.md`, Grandine baseline, Grandine symbol index, Lighthouse-to-Grandine map, and this log update.
+
+### Commands and outcomes
+
+| Command family | Outcome |
+|---|---|
+| Git branch/HEAD/upstream/remotes/status/diff/submodule baseline for all source repositories | Passed; revisions matched prior phases and all worktrees were clean |
+| `find`/Cargo workspace and Makefile/CI entry-point inspection | Passed; identified relevant crates and focused validation entry points |
+| targeted `rg`/`sed` over Grandine types, SSZ, Gloas, config, execution engine, controller/store, gossip, RPC, P2P sync, HTTP/SSE, validator, storage, metrics and spec tests | Passed; architecture symbols and line locations recorded |
+| `rg` for `8025`, `ExecutionProof`, `proof engine`, and `eproof` | No semantic source matches; numeric substrings occurred only in trusted-setup/checksum data. This supports the absence finding, not proof that no future indirect work exists |
+| required-output non-empty checks and line counts | Passed: main report 148 lines; baseline 38; symbol index 42; mapping 42 |
+| final status check for all four repositories | Passed; branch lines only, with no modified/staged/untracked paths |
+
+No build or test was run. Phase 3 changes no source and is an architecture/gap analysis; the proportional checks were source-symbol verification, complete artifact checks, and repository safety checks. Phase 2's known missing C++ compiler would also prevent the relevant workspace build path. Any eventual implementation needs the test matrix in section 11 of the report.
+
+### Quality and completion checks
+
+- Grandine facts are sourced from the Grandine checkout and distinguished from cross-client inferences and proposed changes.
+- Lighthouse behavior is attributed to the Phase 2 branch-local range and is used as an analogue, not mechanically copied.
+- Every grouped gap maps to stable requirement IDs in the detailed Lighthouse-to-Grandine map.
+- Source conflicts (bounds/type, public input, domain, quorum, lifecycle, gossip/dedup, retention, activation and EL source gap) remain explicit.
+- Unchanged Grandine infrastructure is described as current context; no EIP-8025 support is claimed for it.
+- Likely targets name inspected Grandine crates/symbols and carry confidence/open questions.
+- Unaffected consensus areas and the no-fork-choice-effect boundary are explicit.
+- All required Phase 3 artifacts exist under `/work/eip-8025-analysis`; no artifact was placed under `/work/repos`.
+- Phase 4 was not begun.
+
+### Files created or updated
+
+- Created `03-grandine-gap-analysis.md`.
+- Created `evidence/grandine-git-baseline.txt`.
+- Created `evidence/grandine-symbol-index.md`.
+- Created `evidence/lighthouse-grandine-map.md`.
+- Updated `evidence/validation-log.md`.
+
+### Failed validations and limitations
+
+- No command failed in Phase 3.
+- No EIP-8025 consensus-spec test vectors exist in the checked-out feature directory.
+- The EIP-pinned execution-specs checkout is outside the declared source set, so EL guest/host/witness claims remain an open source gap.
+- Uninitialized optional Grandine submodules prevented inspection of their fixture contents; they were not initialized because repositories are read-only and submodule updates are prohibited.
+
+## Phase 3 rerun — exact requirement mapping correction (2026-07-17)
+
+### Phase start
+
+- Phase: 3, Grandine Architecture and Gap Analysis (rerun).
+- EIPs: `feat/eip8025` / `3aa6b30641ef8f98f8945b29ee92c1e8aed1070a`, clean.
+- consensus-specs: `master` / `8c12caee279d77b322446d33440b37479117dcde`, clean.
+- Lighthouse: `optional-proofs-unstable` / `0dd6c3b8cf3b1eece82a0a7ee87282a222d93bf5`, clean.
+- Grandine: `develop` / `d8adce56ed2a324c5abd72af8c0ff94a492ae7d3`, clean, tracking `origin/develop`.
+- Working-tree caveat: Grandine optional submodules remained uninitialized; none was updated.
+- Inputs consumed: all Phase 1 and Phase 2 main reports and evidence indexes; the live EIP; all checked-out EIP-8025 consensus feature documents; the branch-scoped Lighthouse evidence; Grandine source and existing Phase 3 artifacts.
+- Outputs to update: `03-grandine-gap-analysis.md`, `evidence/grandine-git-baseline.txt`, `evidence/grandine-symbol-index.md`, `evidence/lighthouse-grandine-map.md`, and this validation log.
+
+### Commands and outcomes
+
+| Command family | Outcome |
+|---|---|
+| branch/HEAD/remotes/status for all four repositories | Passed; revisions unchanged and all source working trees clean |
+| targeted `rg`/`sed` over Grandine types, SSZ, Gloas transition/controller, execution engine, controller/store, gossip, RPC, discovery, P2P, API, validator, storage, metrics and fixtures | Passed; corrected `ByteList` evidence and distinguished envelope transition support from controller integration TODOs |
+| proof-symbol search (`ExecutionProof`, EIP-8025 spellings, `eproof`, `proof_engine`) | No semantic Grandine source match; supports absence at this revision but is not used as sole architecture evidence |
+| Python read-only exact-ID comparison | Passed for both detailed map and main report: reference 44; rows 44; distinct 44; missing 0; additional 0; duplicates 0 |
+| required-output existence/size check | Passed: main report 22,445 bytes/183 lines; baseline 2,308 bytes/44 lines; symbol index 8,427 bytes/44 lines; detailed map 13,103 bytes/60 lines |
+| repository end-status loop | Passed; branch lines only, no modified/staged/untracked source paths |
+
+The previous Phase 3 artifact grouped and prefix-stripped IDs, which did not meet the revised phase instruction. This rerun supersedes that mapping with one row per exact stable ID and expands the main report to the same exact set.
+
+### Phase-end quality checks
+
+- Grandine claims derive from the checked-out revision; proposals and cross-client inferences remain labeled and are not presented as implemented behavior.
+- Lighthouse analogues remain branch-diff scoped and are not treated as normative.
+- The exact set of 44 stable requirement IDs is present once each in both requirement tables.
+- All source conflicts and external EL specification gaps remain visible.
+- Unaffected consensus areas, the no-critical-path-wait rule, and the no-proof-based-fork-choice boundary are explicit.
+- All outputs exist under `/work/eip-8025-analysis`; Phase 4 was not begun.
+
+### Files updated
+
+- `03-grandine-gap-analysis.md`
+- `evidence/grandine-git-baseline.txt`
+- `evidence/grandine-symbol-index.md`
+- `evidence/lighthouse-grandine-map.md`
+- `evidence/validation-log.md`
+
+### Failed validations and limitations
+
+- No rerun command failed.
+- No build/test was run because this phase changes analysis only; source-level exactness, artifact, and safety checks were proportional validation.
+- Normative EIP-8025 consensus vectors are absent from the checked-out feature directory.
+- The EIP-pinned execution-specs source is outside the declared workspace, so EL guest/host/witness details remain unresolved.
+- Optional Grandine fixture submodules remain uninitialized and were not modified.
